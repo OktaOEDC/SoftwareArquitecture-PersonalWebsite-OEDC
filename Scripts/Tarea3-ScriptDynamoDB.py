@@ -55,7 +55,7 @@ match option:
                 "Ingrese matricula para el record que borrará (escriba ENTER al acabar de escribirla): ")
 
             # Para borrar usamos DELETE_ITEM
-            response = dynamodb.delete_item(
+            dynamodb.delete_item(
                 TableName="Students",
                 Key={
                     "id": {'S': matricula}
