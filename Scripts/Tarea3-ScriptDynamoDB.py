@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# la primera linea es para declarar que se use python 3 cuando se corre como ejecutable
+#  ej(./archivo.py)
 
 import boto3
 import botocore
