@@ -2,19 +2,29 @@
 
 import boto3
 import botocore
+import json
 
 # Lamda hanlder es la funcion prinipal que corre mi lambda
 
 
 def lambda_handler(event, context):
+    #Se necesita una respuesta de tipo json con estos 4 valores en APIS proxy para su funcionamiento correcto
+    baseResponse = {
+        "isBase64Encoded": False,
+        "statusCode": 200,
+        "headers": { "uuuh": "ya vamonos no?!"},
+        "body": "..."
+    }
     # Utilizaremos (al igual que en la tarea e) el cliente de DYNAMO DB, este objeto será nuestro medio de comunicación con dynamo
     dynamodb = boto3.client('dynamodb')
     # Esto es un copy paste del script de mi tarea 3 pero modificado para funcionar en lambda
     try: 
         #Si no nos dió una acción que hacer entonces adios
-        option = event["action"]
+        option = event['httpMethod']
     except:
-        return ("Corre esta lambda denuevo y da un valor C, R, U, o D en la llave 'action' del json de entrada")
+        baseResponse["statusCode"] = 500
+        baseResponse["body"] = "Corre esta lambda denuevo y da un METODO correcto de corrida"
+        return baseResponse
     # Haremos un switch case de 3 opciones (más default) una para creación/actualización,
     # otro para borrado, y otro para lecturas
 
@@ -23,14 +33,15 @@ def lambda_handler(event, context):
     #R -> Delete
     #U -> Update
     #D -> Delete
-    if(option=='C' or option=='U'):  # UPSERT ¿Que sinverguenza no?
+    if(option=='POST' or option=='PUT'):  # UPSERT ¿Que sinverguenza no?
         try:
             # Usaremos de la llamada a la lambda, el usuario matricula, nombre completo y URL del sitio personal
             # En un escenario más normal, hubiera hecho una oducmentación que dice como usar la lambda, pero en
             #     este caso mi tarea será lo unico que habrá
-            matricula = event["entry"]["matricula"]
-            fullname = event["entry"]["full_name"]
-            personlWebsite = event["entry"]["personal_website"]
+            requestBody = json.loads(event["body"])
+            matricula = requestBody['matricula']
+            fullname = requestBody["full_name"]
+            personlWebsite = requestBody["personal_website"]
 
             # PUT_ITEM es para meter items en tablas, si ya existe uno lo sobreescribirá
             # esto lo identifica con la llave primaria (detalles en el documento)
@@ -46,14 +57,18 @@ def lambda_handler(event, context):
                 # En mi tarea 2 explico porque los valores son diccionarios, pero en resumen deben de indicar
                 #  el tipo de valor del valor, en este caso S es STRING, así esta definida la tabla
             )
-            return ("proceso de creación/actualización terminado :)")
-        except:
-            # Excepcion generica para decirle al usuario que si salió mal
-            return ("Hubo un error inesperado creando/editando el record de la tabla Students")
-    elif(option=='D'):
+            baseResponse["body"] = "Proceso de creación terminado"
+            return baseResponse
+        except Exception as e:
+            # Error 500 generico para decirle al usuario que si salió mal
+            baseResponse["statusCode"] = 500
+            baseResponse["headers"]['exception'] = str(e)
+            baseResponse["body"] = "Hubo un error inesperado creando/editando el record de la tabla Students"
+            return baseResponse
+    elif(option=='DELETE'):
         try:
             # Solo necesitamos la llave primaria para borrar
-            matricula = event["entry"]["matricula"]
+            matricula = event["queryStringParameters"]['matricula']
 
             # Para borrar usamos DELETE_ITEM
             dynamodb.delete_item(
@@ -66,20 +81,25 @@ def lambda_handler(event, context):
                 # es para definir si la operación fue un exitó si se cumplió esa función
                 # más detalles en documento
             )
-            return ("proceso de borrado terminado :)")
+            baseResponse["body"] = "Proceso de borrado terminado"
+            return baseResponse
 
         except botocore.exceptions.ClientError as e:
             # En caso de que no se cumpla la condición (no existe ese item)
-            # se levantará esta exepción
+            # se retornará un 404 como error
             if e.response['Error']['Code'] == 'ConditionalCheckFailedException':
-                return ("No existe tal record en la tabla")
+                baseResponse["statusCode"] = 404
+                baseResponse["body"] = "No existe tal record en la tabla"
+                return baseResponse
         except:
-            # Exepción generica si hubo otro tipo de excpeción
-            return ("Error inesperado borrando record de la tabla Students")
-    elif(option=='R'):
+            # Error 500 generico si hubo otro tipo de excpeción
+            baseResponse["statusCode"] = 500
+            baseResponse["body"] = "Error inesperado borrando record de la tabla Students, diste matricula?"
+            return baseResponse
+    elif(option=='GET'):
         try:
             # Solicitar llave primaria (en este caso matricula) para leer el record en la tabla
-            matricula = event["entry"]["matricula"]
+            matricula = event["queryStringParameters"]['matricula']
 
             # Guardar respuesta en variable porque queremos leer información
             # Esto se hace con GET_ITEM
@@ -92,13 +112,19 @@ def lambda_handler(event, context):
             # Verificar si existe la llave Item en la respuesta, este contiene el record en la base de datos
             if ("Item" in response):
                 # Imprimirlo tal como está
-                return (response["Item"])
+                baseResponse["body"] = json.dumps(response["Item"])
+                return baseResponse
             else:
-                # Levantar excepción si no existe ese record
-                return ("No hay record para ese alumno")
+                # Retornar error 404 si no existe ese record
+                baseResponse["statusCode"] = 404
+                baseResponse["body"] = "No hay record para ese alumno"
+                return baseResponse
 
         except:
-            return ("Error inesperado intentando leer record de la tabla Students")
+            baseResponse["statusCode"] = 500
+            baseResponse["body"] = "Error inesperado intentando leer record de la tabla Students, ¿diste matrícula?"
+            return baseResponse
     else:
         # Si no puso un valor valido entonces
-        return ("Corre esta lambda denuevo y da un valor del 1 al 3 en la llave 'action' del json de entrada")
+        baseResponse["body"] = "Corre esta lambda denuevo y da un METODO correcto de corrida"
+        return baseResponse

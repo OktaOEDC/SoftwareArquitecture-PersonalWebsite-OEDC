@@ -30,22 +30,51 @@
             }
         },
         {
+            "FunctionName": "kaladin_delete_user_lambda",
+            "FunctionArn": "arn:aws:lambda:us-east-1:292274580527:function:kaladin_delete_user_lambda",
+            "Runtime": "python3.9",
+            "Role": "arn:aws:iam::292274580527:role/lambda_ice191",
+            "Handler": "delete_user.lambda_handler",
+            "CodeSize": 563,
+            "Description": "",
+            "Timeout": 3,
+            "MemorySize": 128,
+            "LastModified": "2023-03-05T04:00:19.965+0000",
+            "CodeSha256": "q6OFiiK1JEcj4ERfOWtrAWLoZShJw+i5eRD8W6AkRnw=",
+            "Version": "$LATEST",
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "RevisionId": "697b48ed-d782-4ab9-8927-e28d4db9f81b",
+            "PackageType": "Zip",
+            "Architectures": [
+                "x86_64"
+            ],
+            "EphemeralStorage": {
+                "Size": 512
+            },
+            "SnapStart": {
+                "ApplyOn": "None",
+                "OptimizationStatus": "Off"
+            }
+        },
+        {
             "FunctionName": "AbnerCrud",
             "FunctionArn": "arn:aws:lambda:us-east-1:292274580527:function:AbnerCrud",
             "Runtime": "nodejs16.x",
             "Role": "arn:aws:iam::292274580527:role/lambda_ice191",
             "Handler": "index.handler",
-            "CodeSize": 802,
+            "CodeSize": 883,
             "Description": "",
             "Timeout": 3,
             "MemorySize": 128,
-            "LastModified": "2023-03-04T22:34:59.421+0000",
-            "CodeSha256": "juuLt9kt3xCWZU2FyAA7J42cVGFWGmF9ZsNa86Feb6o=",
+            "LastModified": "2023-03-04T23:35:00.158+0000",
+            "CodeSha256": "nUMJMarmfdlrmGRvV91CqnZ15gxTdVR92JitC4X6uVk=",
             "Version": "$LATEST",
             "TracingConfig": {
                 "Mode": "PassThrough"
             },
-            "RevisionId": "fb91ed32-e8a8-4abf-8154-adb49447e090",
+            "RevisionId": "ffcbf6c1-0107-41df-8cdd-9b35961e7a5a",
             "PackageType": "Zip",
             "Architectures": [
                 "x86_64"
@@ -88,6 +117,35 @@
             }
         },
         {
+            "FunctionName": "MARCO_function_read",
+            "FunctionArn": "arn:aws:lambda:us-east-1:292274580527:function:MARCO_function_read",
+            "Runtime": "python3.9",
+            "Role": "arn:aws:iam::292274580527:role/lambda_ice191",
+            "Handler": "MARCO_ld_function_read.lambda_handler",
+            "CodeSize": 928,
+            "Description": "",
+            "Timeout": 3,
+            "MemorySize": 128,
+            "LastModified": "2023-03-05T02:47:55.249+0000",
+            "CodeSha256": "/MvAeIRR2l3CnpJObBDhnMZxfDhmE3o5rw4W++ejKL8=",
+            "Version": "$LATEST",
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "RevisionId": "55a89b46-55bc-4da9-be38-32cbd12ca0d7",
+            "PackageType": "Zip",
+            "Architectures": [
+                "x86_64"
+            ],
+            "EphemeralStorage": {
+                "Size": 512
+            },
+            "SnapStart": {
+                "ApplyOn": "None",
+                "OptimizationStatus": "Off"
+            }
+        },
+        {
             "FunctionName": "moroyoqui_api",
             "FunctionArn": "arn:aws:lambda:us-east-1:292274580527:function:moroyoqui_api",
             "Runtime": "python3.9",
@@ -104,6 +162,64 @@
                 "Mode": "PassThrough"
             },
             "RevisionId": "18243930-750b-4c09-8ffd-2254fa8e57f9",
+            "PackageType": "Zip",
+            "Architectures": [
+                "x86_64"
+            ],
+            "EphemeralStorage": {
+                "Size": 512
+            },
+            "SnapStart": {
+                "ApplyOn": "None",
+                "OptimizationStatus": "Off"
+            }
+        },
+        {
+            "FunctionName": "MARCO_function_create",
+            "FunctionArn": "arn:aws:lambda:us-east-1:292274580527:function:MARCO_function_create",
+            "Runtime": "python3.9",
+            "Role": "arn:aws:iam::292274580527:role/lambda_ice191",
+            "Handler": "MARCO_ld_function_create.lambda_handler",
+            "CodeSize": 732,
+            "Description": "",
+            "Timeout": 3,
+            "MemorySize": 128,
+            "LastModified": "2023-03-05T03:06:06.309+0000",
+            "CodeSha256": "AYJrT14tE/Cv21OtNMw0tD/Xcpu6UkA1PB96SI87Nlo=",
+            "Version": "$LATEST",
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "RevisionId": "a7527cb2-6333-4463-bd02-6b13ba1f6359",
+            "PackageType": "Zip",
+            "Architectures": [
+                "x86_64"
+            ],
+            "EphemeralStorage": {
+                "Size": 512
+            },
+            "SnapStart": {
+                "ApplyOn": "None",
+                "OptimizationStatus": "Off"
+            }
+        },
+        {
+            "FunctionName": "kaladin_create_user_lambda",
+            "FunctionArn": "arn:aws:lambda:us-east-1:292274580527:function:kaladin_create_user_lambda",
+            "Runtime": "python3.9",
+            "Role": "arn:aws:iam::292274580527:role/lambda_ice191",
+            "Handler": "create_user.lambda_handler",
+            "CodeSize": 579,
+            "Description": "",
+            "Timeout": 3,
+            "MemorySize": 128,
+            "LastModified": "2023-03-05T03:56:09.216+0000",
+            "CodeSha256": "WHa2qJ5/K5Lqew6hJw5fvF1wipmipRm9IjFEsRt6/sY=",
+            "Version": "$LATEST",
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "RevisionId": "06b8cb2e-b225-40ba-b960-b0488ebcfbda",
             "PackageType": "Zip",
             "Architectures": [
                 "x86_64"
@@ -209,17 +325,17 @@
             "Runtime": "python3.9",
             "Role": "arn:aws:iam::292274580527:role/lambda_ice191",
             "Handler": "Tarea5-LambdaDynamoDB.lambda_handler",
-            "CodeSize": 1961,
+            "CodeSize": 4058,
             "Description": "",
             "Timeout": 3,
             "MemorySize": 128,
-            "LastModified": "2023-03-04T21:21:57.000+0000",
-            "CodeSha256": "ZWB5YdNUwN45psGSFFXpxZlPmSsb10zAQy/1LSVmcAk=",
+            "LastModified": "2023-03-05T04:51:24.000+0000",
+            "CodeSha256": "QRB849DH8AkhjQx4pB5y+4NjsJc04JsPCv1ROrSvAyY=",
             "Version": "$LATEST",
             "TracingConfig": {
                 "Mode": "PassThrough"
             },
-            "RevisionId": "17a745d2-d7b9-4145-bac8-fb10d841ca4a",
+            "RevisionId": "6f2c75c3-3457-4e7c-ae89-ad1af7d13836",
             "PackageType": "Zip",
             "Architectures": [
                 "x86_64"
@@ -249,6 +365,35 @@
                 "Mode": "PassThrough"
             },
             "RevisionId": "f07a9ae7-a4df-4a0b-bfb7-d54e46a9f25a",
+            "PackageType": "Zip",
+            "Architectures": [
+                "x86_64"
+            ],
+            "EphemeralStorage": {
+                "Size": 512
+            },
+            "SnapStart": {
+                "ApplyOn": "None",
+                "OptimizationStatus": "Off"
+            }
+        },
+        {
+            "FunctionName": "kaladin_update_user_lambda",
+            "FunctionArn": "arn:aws:lambda:us-east-1:292274580527:function:kaladin_update_user_lambda",
+            "Runtime": "python3.9",
+            "Role": "arn:aws:iam::292274580527:role/lambda_ice191",
+            "Handler": "update_user.lambda_handler",
+            "CodeSize": 678,
+            "Description": "",
+            "Timeout": 3,
+            "MemorySize": 128,
+            "LastModified": "2023-03-05T03:59:00.941+0000",
+            "CodeSha256": "PNMFYrxxQw0XWA1lxJbMENQoTWqU8FOSQie8CLydf88=",
+            "Version": "$LATEST",
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "RevisionId": "749a4386-1b98-4078-9fa8-0161bbbcdd29",
             "PackageType": "Zip",
             "Architectures": [
                 "x86_64"
@@ -320,6 +465,35 @@
             }
         },
         {
+            "FunctionName": "kaladin_get_user_lambda",
+            "FunctionArn": "arn:aws:lambda:us-east-1:292274580527:function:kaladin_get_user_lambda",
+            "Runtime": "python3.9",
+            "Role": "arn:aws:iam::292274580527:role/lambda_ice191",
+            "Handler": "get_user.lambda_handler",
+            "CodeSize": 604,
+            "Description": "",
+            "Timeout": 3,
+            "MemorySize": 128,
+            "LastModified": "2023-03-05T03:54:31.675+0000",
+            "CodeSha256": "1ldsTEa5LHX3GQeaNWvo3hxsph2NnH/+QeXUWxrZHSI=",
+            "Version": "$LATEST",
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "RevisionId": "22eeb008-d7c6-426b-ad39-e5f3895d564d",
+            "PackageType": "Zip",
+            "Architectures": [
+                "x86_64"
+            ],
+            "EphemeralStorage": {
+                "Size": 512
+            },
+            "SnapStart": {
+                "ApplyOn": "None",
+                "OptimizationStatus": "Off"
+            }
+        },
+        {
             "FunctionName": "hector-test-fn",
             "FunctionArn": "arn:aws:lambda:us-east-1:292274580527:function:hector-test-fn",
             "Runtime": "nodejs18.x",
@@ -336,6 +510,35 @@
                 "Mode": "PassThrough"
             },
             "RevisionId": "3afccd54-607d-486f-809e-74f1d955f210",
+            "PackageType": "Zip",
+            "Architectures": [
+                "x86_64"
+            ],
+            "EphemeralStorage": {
+                "Size": 512
+            },
+            "SnapStart": {
+                "ApplyOn": "None",
+                "OptimizationStatus": "Off"
+            }
+        },
+        {
+            "FunctionName": "MARCO_function_delete",
+            "FunctionArn": "arn:aws:lambda:us-east-1:292274580527:function:MARCO_function_delete",
+            "Runtime": "python3.9",
+            "Role": "arn:aws:iam::292274580527:role/lambda_ice191",
+            "Handler": "MARCO_ld_function_delete.lambda_handler",
+            "CodeSize": 727,
+            "Description": "",
+            "Timeout": 3,
+            "MemorySize": 128,
+            "LastModified": "2023-03-05T03:17:20.839+0000",
+            "CodeSha256": "d9K1zW99/QuTqG1y0ms9jk0EE/nY9it6KblNNOKrtRM=",
+            "Version": "$LATEST",
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "RevisionId": "68cde606-9906-4d68-80fd-db5fecd55c38",
             "PackageType": "Zip",
             "Architectures": [
                 "x86_64"
@@ -383,17 +586,17 @@
             "Runtime": "python3.9",
             "Role": "arn:aws:iam::292274580527:role/lambda_ice191",
             "Handler": "index.handler",
-            "CodeSize": 2219,
+            "CodeSize": 2225,
             "Description": "",
             "Timeout": 3,
             "MemorySize": 128,
-            "LastModified": "2023-03-04T21:50:37.000+0000",
-            "CodeSha256": "P+cuta+qx4237OZHbgzZ6701YPC6/xXJXx/hvQVI46U=",
+            "LastModified": "2023-03-05T04:30:45.000+0000",
+            "CodeSha256": "VUNRoNAESLldso0q9A07fNt8XL31tjiorwGBOnalr5w=",
             "Version": "$LATEST",
             "TracingConfig": {
                 "Mode": "PassThrough"
             },
-            "RevisionId": "4c1cb432-221a-4225-8130-2b5cadbb5188",
+            "RevisionId": "75329002-1e5e-4ae5-997c-06fd19ed5570",
             "PackageType": "Zip",
             "Architectures": [
                 "x86_64"
