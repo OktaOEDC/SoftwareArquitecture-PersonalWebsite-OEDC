@@ -1,0 +1,13 @@
+{
+    "id": "p9nbn6isej",
+    "name": "DuranOmarAPI",
+    "description": "Saquenme de aquí porfavor",
+    "createdDate": "2023-03-04T17:55:34-08:00",
+    "apiKeySource": "HEADER",
+    "endpointConfiguration": {
+        "types": [
+            "EDGE"
+        ]
+    },
+    "disableExecuteApiEndpoint": false
+}

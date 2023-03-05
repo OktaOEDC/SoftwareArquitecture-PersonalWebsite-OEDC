@@ -1,0 +1,89 @@
+{
+    "items": [
+        {
+            "id": "009kah5l7l",
+            "name": "Moroyoqui_StudentsAPI",
+            "createdDate": "2023-02-25T18:45:22-08:00",
+            "apiKeySource": "HEADER",
+            "endpointConfiguration": {
+                "types": [
+                    "EDGE"
+                ]
+            },
+            "disableExecuteApiEndpoint": false
+        },
+        {
+            "id": "4b4m7aewm7",
+            "name": "studentsAPI",
+            "createdDate": "2023-03-03T22:47:18-08:00",
+            "apiKeySource": "HEADER",
+            "endpointConfiguration": {
+                "types": [
+                    "EDGE"
+                ]
+            },
+            "disableExecuteApiEndpoint": false
+        },
+        {
+            "id": "dx8e329501",
+            "name": "hugoAPI",
+            "createdDate": "2023-03-01T20:39:38-08:00",
+            "apiKeySource": "HEADER",
+            "endpointConfiguration": {
+                "types": [
+                    "EDGE"
+                ]
+            },
+            "disableExecuteApiEndpoint": false
+        },
+        {
+            "id": "gu78xwqxkf",
+            "name": "dev-edgar-service",
+            "createdDate": "2017-10-03T20:38:23-07:00",
+            "apiKeySource": "HEADER",
+            "endpointConfiguration": {
+                "types": [
+                    "EDGE"
+                ]
+            },
+            "disableExecuteApiEndpoint": false
+        },
+        {
+            "id": "p9nbn6isej",
+            "name": "DuranOmarAPI",
+            "description": "Saquenme de aquí porfavor",
+            "createdDate": "2023-03-04T17:55:34-08:00",
+            "apiKeySource": "HEADER",
+            "endpointConfiguration": {
+                "types": [
+                    "EDGE"
+                ]
+            },
+            "disableExecuteApiEndpoint": false
+        },
+        {
+            "id": "xc3h7hs4lk",
+            "name": "dev-alexherreraservice",
+            "createdDate": "2017-09-28T21:47:13-07:00",
+            "apiKeySource": "HEADER",
+            "endpointConfiguration": {
+                "types": [
+                    "EDGE"
+                ]
+            },
+            "disableExecuteApiEndpoint": false
+        },
+        {
+            "id": "yq2x13bwug",
+            "name": "dynamic_website",
+            "createdDate": "2023-02-16T11:10:00-08:00",
+            "apiKeySource": "HEADER",
+            "endpointConfiguration": {
+                "types": [
+                    "EDGE"
+                ]
+            },
+            "disableExecuteApiEndpoint": false
+        }
+    ]
+}
