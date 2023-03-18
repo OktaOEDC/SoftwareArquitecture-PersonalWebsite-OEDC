@@ -1,0 +1,61 @@
+aws lambda create-function \
+    --function-name weather_lambda_omar \
+    --runtime python3.9 \
+    --zip-file fileb://weather_lambda_omar.zip \
+    --handler weather_lambda_omar.main.lambda_handler \
+    --role arn:aws:iam::292274580527:role/lambda_ice191
+
+aws lambda invoke --function-name weather_lambda_omar \
+    --payload '{"id": "009930"}' responseOmar.json
+
+aws lambda invoke --function-name weather_lambda_omar \
+    --payload '{"id": "009930"}' response_marcelino.json
+
+
+aws apigateway create-rest-api --name weather_api_omar
+
+aws apigateway get-resources --rest-api-id 924l8fs9nf
+
+aws apigateway create-resource --rest-api-id 924l8fs9nf --parent-id ytdttk04a4 --path-part weather
+
+aws apigateway create-resource --rest-api-id 924l8fs9nf --parent-id 2j5zqc --path-part {id}
+
+aws apigateway put-method --rest-api-id 924l8fs9nf --resource-id ctjvd9 --http-method GET --authorization-type NONE
+
+aws apigateway create-resource --rest-api-id 924l8fs9nf --parent-id ytdttk04a4 --path-part students
+
+aws apigateway create-resource --rest-api-id 924l8fs9nf --parent-id czh3wy --path-part {id}
+
+aws apigateway put-method --rest-api-id 924l8fs9nf --resource-id kyojoy --http-method GET --authorization-type NONE
+
+aws apigateway put-integration \
+    --rest-api-id 924l8fs9nf \
+    --resource-id kyojoy \
+    --http-method GET \
+    --integration-http-method POST \
+    --type AWS_PROXY \
+    --uri "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:292274580527:function:weather_lambda_omar/invocations"
+
+aws apigateway create-deployment \
+    --rest-api-id 924l8fs9nf \
+    --stage-name dev \
+    --description "deploy de API de clima de OMAR"
+
+aws lambda add-permission --function-name "weather_lambda_omar" \
+    --statement-id autorizadorDeLaLambdaDeOmar \
+    --action --lambda:InvokeFunction \
+    --principal apigateway.amazonaws.com
+
+    #students ID
+aws apigateway put-integration \
+    --rest-api-id 924l8fs9nf \
+    --resource-id kyojoy \
+    --http-method GET \
+    --type AWS_PROXY \
+    --integration-http-method POST \
+    --uri "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:292274580527:function:weather_lambda_omar/invocations"
+
+Modificar script para regresar cuerpo de proxy y sacar la ID de los queryParams... adios
+
+
+

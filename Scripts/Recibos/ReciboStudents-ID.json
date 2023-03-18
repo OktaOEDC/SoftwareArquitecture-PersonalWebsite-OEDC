@@ -1,0 +1,6 @@
+{
+    "id": "kyojoy",
+    "parentId": "czh3wy",
+    "pathPart": "{id}",
+    "path": "/students/{id}"
+}

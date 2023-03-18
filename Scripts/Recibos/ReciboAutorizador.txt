@@ -1,0 +1,12 @@
+{
+    "items": [
+        {
+            "id": "7b8skq",
+            "name": "autorizadorClimaticoDeOmar",
+            "type": "REQUEST",
+            "authType": "custom",
+            "authorizerUri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:292274580527:function:weather_lambda_omar/invocations",
+            "identitySource": "method.request.header.Authorization"
+        }
+    ]
+}
