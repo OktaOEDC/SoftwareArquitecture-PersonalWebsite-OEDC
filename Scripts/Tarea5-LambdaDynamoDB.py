@@ -42,6 +42,7 @@ def lambda_handler(event, context):
             matricula = requestBody['matricula']
             fullname = requestBody["full_name"]
             personlWebsite = requestBody["personal_website"]
+            city = requestBody["city"]
 
             # PUT_ITEM es para meter items en tablas, si ya existe uno lo sobreescribirá
             # esto lo identifica con la llave primaria (detalles en el documento)
@@ -52,7 +53,8 @@ def lambda_handler(event, context):
                     "id": {'S': matricula},
                     # Esto y el otro dato son los que ya existian en la tabla
                     "full_name": {'S': fullname},
-                    "personal_website": {'S': personlWebsite}
+                    "personal_website": {'S': personlWebsite},
+                    "city": {'S': city}
                 }
                 # En mi tarea 2 explico porque los valores son diccionarios, pero en resumen deben de indicar
                 #  el tipo de valor del valor, en este caso S es STRING, así esta definida la tabla

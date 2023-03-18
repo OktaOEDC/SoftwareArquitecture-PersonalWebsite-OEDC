@@ -1,1 +1,0 @@
-{"errorMessage": "name 'null' is not defined", "errorType": "NameError", "requestId": "42720de2-9c9f-480d-b883-dbbd981eaad7", "stackTrace": ["  File \"/var/task/weather_lambda_omar/main.py\", line 10, in lambda_handler\n    return get_response(200, event)\n", "  File \"/var/task/weather_lambda_omar/main.py\", line 51, in get_response\n    \"headers\": null,\n"]}
