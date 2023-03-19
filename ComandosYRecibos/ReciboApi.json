@@ -1,0 +1,12 @@
+{
+    "id": "924l8fs9nf",
+    "name": "weather_api_omar",
+    "createdDate": "2023-03-17T18:50:58-07:00",
+    "apiKeySource": "HEADER",
+    "endpointConfiguration": {
+        "types": [
+            "EDGE"
+        ]
+    },
+    "disableExecuteApiEndpoint": false
+}
