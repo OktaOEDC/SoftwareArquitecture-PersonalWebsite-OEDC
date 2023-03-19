@@ -12,15 +12,16 @@ def getAPICreds():
     #Las credenciales estan aquí, en el SecretString
     return secrets_response['SecretString']
 
-def isAuthorized(authHeader):
+def isAuthorized(authHeader: str):
     #Este metodo es para verificar que el header de autentificación existe
     # Y, que viene con el usuario y contraseña correctos
     superSecretCred = getAPICreds()
-    if(superSecretCred in authHeader):
+    if(superSecretCred == authHeader.split(" ")[1]):
         #Usuario y contraseña en BASIC auth se encodifican en base 64
         # en esta sintaxis:      user:password
         # pero en base64, así que reviso que en el header de autorizacion
-        # este presente el substring con las credenciales de este ejercicio
+        # este presente el string con las credenciales de este ejercicio
+        # Sería la segunda parte del header, donde se separa por un espacio
         return True
     else:
         return False
@@ -46,8 +47,6 @@ def lambda_handler(event, context):
     matricula = event["pathParameters"]["id"]
 
 
-    
-    
     # Esto es un copy paste del script de mi tarea 4 pero modificado para funcionar en lambda
     try: 
         #Si no nos dió una acción que hacer entonces adios
