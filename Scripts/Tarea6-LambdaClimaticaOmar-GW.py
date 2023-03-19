@@ -4,6 +4,7 @@ import urllib3
 from botocore.exceptions import ClientError
 
 def getAPICreds():
+    #Cliente que usa el servicio de secretos
     secretsmanager = boto3.client(service_name='secretsmanager')
     #Nombre de secreto
     secret_name = "api_creds_weather_omar"
