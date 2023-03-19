@@ -4,7 +4,6 @@ import urllib3
 from botocore.exceptions import ClientError
 
 def getAPICreds():
-    #Cliente que usa el servicio de secretos
     secretsmanager = boto3.client(service_name='secretsmanager')
     #Nombre de secreto
     secret_name = "api_creds_weather_omar"
@@ -28,37 +27,84 @@ def isAuthorized(authHeader):
 
 def lambda_handler(event, context):
     # Revisar si el usuario dio el usuario y contraseña correctos
-    if(isAuthorized(event["headers"]["Authorization"])):
-        #Si es así seguimos
-        pass
-    else:
-        #Si no entonces retornar un 401 (No autorizado), y decirle al usuario
-        #  que no está autorizado
-        return get_response(401, "No estas autorizado para usar esta API")
+    try:
+        if(isAuthorized(event["headers"]["Authorization"])):
+            #Si es así seguimos
+            pass
+        else:
+            #Si no entonces retornar un 401 (No autorizado), y decirle al usuario
+            #  que no está autorizado
+            return get_response(401, "No estas autorizado para usar esta API")
+    except:
+        return get_response(500, "No Auth provided or server broke")
     
-    dynamo = boto3.resource("dynamodb")
-    students_table = dynamo.Table("Students")
+
+    dynamoReader = boto3.resource("dynamodb")
+    dynamoWriter = boto3.client("dynamodb")
     # En vez de buscar id directamente
     #  debemos buscar ID en los path parameters
     matricula = event["pathParameters"]["id"]
-    
 
-    if matricula:
+
+    
+    
+    # Esto es un copy paste del script de mi tarea 4 pero modificado para funcionar en lambda
+    try: 
+        #Si no nos dió una acción que hacer entonces adios
+        option = event['httpMethod']
+    except:
+        return get_response(500,"Corre esta API/lambda con un metodo HTTP correcto")
+
+    if(option=='POST' or option=='PUT'):  # UPSERT ¿Que sinverguenza no?
         try:
-            student = students_table.get_item(Key={"id": matricula})
-            api_key = get_secret()
-            weather = get_weather(student, api_key)
-            success_response = {
-                "id": matricula,
-                "full_name": student["Item"]["full_name"],
-                "city": student["Item"]["city"],
-                "weather": json.loads(weather)
-            }
-            return get_response(200, success_response)
-        except ClientError as error:
-            raise error
-    else:
-        return get_response(400, {"message": "Missing required field id"})
+            # Usaremos de la llamada a la lambda, el usuario matricula, nombre completo y URL del sitio personal
+            # En un escenario más normal, hubiera hecho una oducmentación que dice como usar la lambda, pero en
+            #     este caso mi tarea será lo unico que habrá
+            requestBody = json.loads(event["body"])
+            fullname = requestBody["full_name"]
+            personlWebsite = requestBody["personal_website"]
+            city = requestBody["city"]
+
+            # PUT_ITEM es para meter items en tablas, si ya existe uno lo sobreescribirá
+            # esto lo identifica con la llave primaria (detalles en el documento)
+            dynamoWriter.put_item(
+                TableName="Students",  # Necesitamos nombre de tabla
+                Item={
+                    # Llave primaria es obligatoria
+                    "id": {'S': matricula},
+                    # Esto y el otro dato son los que ya existian en la tabla
+                    "full_name": {'S': fullname},
+                    "personal_website": {'S': personlWebsite},
+                    "city": {'S': city}
+                }
+                # En mi tarea 2 explico porque los valores son diccionarios, pero en resumen deben de indicar
+                #  el tipo de valor del valor, en este caso S es STRING, así esta definida la tabla
+            )
+            return get_response(200,"Creación/Actualización terminada")
+        except Exception as e:
+            # Error 500 generico para decirle al usuario que si salió mal
+            return get_response(500, f"Error creando/actualizando estudiantes {str(e)}")
+    elif(option=="GET"):
+        students_table = dynamoReader.Table("Students")
+        if matricula:
+            try:
+                student = students_table.get_item(
+                    TableName="Students",
+                    Key={"id": matricula}
+                )
+                api_key = get_secret()
+                weather = get_weather(student, api_key)
+                success_response = {
+                    "id": matricula,
+                    "full_name": student["Item"]["full_name"],
+                    "city": student["Item"]["city"],
+                    "weather": json.loads(weather)
+                }
+                return get_response(200, success_response)
+            except ClientError as error:
+                return get_response(500, str(e))
+        else:
+            return get_response(400, {"message": "Missing required field id"})
 
 
 def get_weather(student, api_key):
