@@ -3,11 +3,20 @@ import boto3
 import urllib3
 from botocore.exceptions import ClientError
 
+def getAPICreds():
+    secretsmanager = boto3.client(service_name='secretsmanager')
+    #Nombre de secreto
+    secret_name = "api_creds_weather_omar"
+    #Conseguir el secreto con ese nombre
+    secrets_response = secretsmanager.get_secret_value(SecretId=secret_name)
+    #Las credenciales estan aquí, en el SecretString
+    return secrets_response['SecretString']
 
 def isAuthorized(authHeader):
     #Este metodo es para verificar que el header de autentificación existe
     # Y, que viene con el usuario y contraseña correctos
-    if("YWRtaW46YWJjMTIzIUA=" in authHeader):
+    superSecretCred = getAPICreds()
+    if(superSecretCred in authHeader):
         #Usuario y contraseña en BASIC auth se encodifican en base 64
         # en esta sintaxis:      user:password
         # pero en base64, así que reviso que en el header de autorizacion
