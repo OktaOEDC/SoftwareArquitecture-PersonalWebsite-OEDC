@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 def isAuthorized(authHeader):
     #Este metodo es para verificar que el header de autentificación existe
     # Y, que viene con el usuario y contraseña correctos
-    if("YWRtaW46YWJjMTIzQA==" in authHeader):
+    if("YWRtaW46YWJjMTIzIUA=" in authHeader):
         #Usuario y contraseña en BASIC auth se encodifican en base 64
         # en esta sintaxis:      user:password
         # pero en base64, así que reviso que en el header de autorizacion
