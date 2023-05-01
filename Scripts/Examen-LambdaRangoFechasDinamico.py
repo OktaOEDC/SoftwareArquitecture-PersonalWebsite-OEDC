@@ -5,8 +5,8 @@ from datetime import datetime #Libreria para restar fechas
 
 def lambda_handler(event, context):
     #HTML STRING: Aquí irán unos strings con html 
-    htmlHeadString: str = "<!DOCTYPE html><html><head><title>Rango de fechas dinámico</title></head><body><p>"
-    htmlFooterString: str = "</p></body></html>"
+    htmlHeadString: str = "<!DOCTYPE html><html><head><title>Rango de fechas dinámico</title></head><body><h1>"
+    htmlFooterString: str = "</h1></body></html>"
     htmlReturnString: str = ""
 
     #Se necesita una respuesta de tipo json con estos 4 valores en APIS proxy para su funcionamiento correcto
@@ -33,8 +33,10 @@ def lambda_handler(event, context):
 
         #La fecha menor debe de ser la izquierda en esta API
         if(endDateStr < startDateStr):
+            answer: str = "Fecha final es menor que la de inicio, favor de escribir primero la fecha inicial"
+            htmlReturnString = htmlHeadString + answer + htmlFooterString
+            baseResponse["body"] = htmlReturnString
             baseResponse["statusCode"] = 500
-            baseResponse["body"] = "Fecha final es menor que la de inicio, favor de escribir primero la fecha inicial"
         else:
             # Hacer calculos de fechas
             days: int = (endDate-startDate).days
@@ -45,7 +47,9 @@ def lambda_handler(event, context):
             baseResponse["body"] = htmlReturnString
         
     else:
+        answer: str = "Rango de fechas no sigue la sintaxis YYYYMMDD-YYYYMMDD"
+        htmlReturnString = htmlHeadString + answer + htmlFooterString
+        baseResponse["body"] = htmlReturnString
         baseResponse["statusCode"] = 500
-        baseResponse["body"] = "Rango de fechas no sigue la sintaxis YYYYMMDD-YYYYMMDD"
 
     return baseResponse
